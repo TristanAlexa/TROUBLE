@@ -11,15 +11,20 @@ public class Player : MonoBehaviour
     public int routePos;
     public Route currentRoute;
     public static int valueToMove;
+    public Rigidbody diceRB;
+    public Dice dice;
     bool isMoving;
+
+
+    //Get the Dice RB
+    private void Start()
+    {
+        diceRB = GameObject.FindGameObjectWithTag("Dice").GetComponent<Rigidbody>();
+    }
     private void Update()
     {
-        
-        //Handle Screen touches
-        //If player has tapped the die space roll the die
-        //if (Input.touchCount > 0 && !isMoving)
-        
-        if (Input.touchCount > 0 && !isMoving)
+        //Move player under these conditions
+        if (!isMoving)
         {
             valueToMove = Dice.diceValue;
             //Avoiding overflow if routePos+DiceSideValue is greater than the amount of spaces left to move
@@ -51,6 +56,7 @@ public class Player : MonoBehaviour
             while (MoveToNextTile(nextPos)) { yield return null; }
 
             yield return new WaitForSeconds(0.1f);
+            Dice.diceValue -= 1;
             valueToMove -= 1;
             routePos += 1;
         }

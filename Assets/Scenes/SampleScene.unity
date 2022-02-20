@@ -1656,7 +1656,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   routePos: 0
   currentRoute: {fileID: 719423901}
-  steps: 0
 --- !u!1 &796055482
 GameObject:
   m_ObjectHideFlags: 0
@@ -4072,7 +4071,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c48c86d7df57043d0a1f5e21824d3e34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  diceValue: 0
   diceSides:
   - {fileID: 719877963}
   - {fileID: 517178526}
@@ -4146,6 +4144,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Dice_d6_Plastic Glossy Pure write
+      objectReference: {fileID: 0}
+    - target: {fileID: 4429635795828605001, guid: d4d69f835c71a498789623a61557f332,
+        type: 3}
+      propertyPath: m_TagString
+      value: Dice
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7141684852167477095, guid: d4d69f835c71a498789623a61557f332, type: 3}

@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class Dice : MonoBehaviour
 {
-    Rigidbody rb;
+    public Rigidbody rb;
 
     bool hasLanded;
-    bool thrown;
+    public bool thrown;
 
     Vector3 initPos;
 
@@ -27,8 +27,8 @@ public class Dice : MonoBehaviour
     //Get user input to roll dice
     private void Update()
     {
-        if (Input.touchCount > 0)
-        //if (Input.GetKeyDown(KeyCode.Space))
+        //if (Input.touchCount > 0)
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             RollDice();
         }
@@ -42,10 +42,10 @@ public class Dice : MonoBehaviour
         }
 
         //Roll again if dice lands on an edge, not giving a value
-        else if (rb.IsSleeping() && hasLanded && diceValue == 0)
-        {
-            RollAgain();
-        }
+        //else if (rb.IsSleeping() && hasLanded && diceValue == 0)
+        //{
+            //RollAgain();
+        //}
     }
 
     //Allow dice to fall and spin randomly if dice can be thrown 
