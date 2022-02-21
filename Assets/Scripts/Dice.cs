@@ -7,7 +7,7 @@ public class Dice : MonoBehaviour
     public Rigidbody rb;
 
     bool hasLanded;
-    public bool thrown;
+    bool thrown;
 
     Vector3 initPos;
 
