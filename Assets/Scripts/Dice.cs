@@ -40,12 +40,6 @@ public class Dice : MonoBehaviour
             rb.useGravity = false;
             DiceValueCheck();
         }
-
-        //Roll again if dice lands on an edge, not giving a value
-        //else if (rb.IsSleeping() && hasLanded && diceValue == 0)
-        //{
-            //RollAgain();
-        //}
     }
 
     //Allow dice to fall and spin randomly if dice can be thrown 

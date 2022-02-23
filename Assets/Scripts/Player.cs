@@ -7,15 +7,17 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
-    //Use in onTriggerEvent to send player back if land on same pos
-    public int routePos;
+    //How do i reference the Player collision script on the child gameobject to get the boolean atHome
+
     public Route currentRoute;
+    public int routePos;
     bool isMoving;
+    //Use in onTriggerEvent to send player back if land on same pos
 
     private void Update()
     {
-        //Move player under these conditions
-        if (!isMoving)
+        //Move the player along the game route if the player got out of home
+        if (!isMoving) //&& !atHome
         {
             //Avoiding overflow if routePos+DiceSideValue is greater than the amount of spaces left to move
             if (routePos + Dice.diceValue < currentRoute.childNodeList.Count)
@@ -59,4 +61,7 @@ public class Player : MonoBehaviour
         return tile != (transform.position = Vector3.MoveTowards(transform.position, tile, 2f * Time.deltaTime));
         
     }
+
+
+    
 }

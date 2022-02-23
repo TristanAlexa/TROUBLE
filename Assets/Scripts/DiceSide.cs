@@ -6,7 +6,7 @@ public class DiceSide : MonoBehaviour
 {
     //Collisions for dice sides
 
-    bool onGround;
+    bool onGround; //either true or false
     public int sideValue;
 
 
@@ -26,6 +26,7 @@ public class DiceSide : MonoBehaviour
         }
     }
 
+    //returns T/F value of onGround
     public bool OnGround()
     {
         return onGround;
