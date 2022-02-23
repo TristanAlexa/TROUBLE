@@ -1637,7 +1637,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentRoute: {fileID: 719423901}
-  routePos: -1
+  routePos: 0
 --- !u!1 &796055482
 GameObject:
   m_ObjectHideFlags: 0
