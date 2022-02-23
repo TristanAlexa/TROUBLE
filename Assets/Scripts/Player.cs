@@ -8,16 +8,34 @@ using UnityEngine.UI;
 public class Player : MonoBehaviour
 {
     //How do i reference the Player collision script on the child gameobject to get the boolean atHome
+    public GameObject blueStart;
 
+    //Player Components
+    public Rigidbody playerRB;
     public Route currentRoute;
     public int routePos;
     bool isMoving;
+
+    //Refernce sub-scripts
+    [SerializeField]
+    internal PlayerCollision collisionScript;
+
     //Use in onTriggerEvent to send player back if land on same pos
 
+    private void Start()
+    {
+        if (blueStart == null)
+        {
+            blueStart = GameObject.FindGameObjectWithTag("BlueStart");
+            Debug.Log("Blue start is available");
+        }
+    }
+
+    //Updates player position along board according to dice values
     private void Update()
     {
-        //Move the player along the game route if the player got out of home
-        if (!isMoving) //&& !atHome
+        //Movement along the active playing route ->CURRENT CONDITIONS DO NOT STOP PLAYER FROM MOVING AFTER LEAVING HOME
+        if (!isMoving && !collisionScript.atHome)
         {
             //Avoiding overflow if routePos+DiceSideValue is greater than the amount of spaces left to move
             if (routePos + Dice.diceValue < currentRoute.childNodeList.Count)
@@ -30,6 +48,20 @@ public class Player : MonoBehaviour
                 Debug.Log("rolled number is too high!");
             }
         }
+        
+        //Movement from home space to start space.
+        else if (!isMoving && collisionScript.atHome)
+        {
+        
+            if(Dice.diceValue == 6)
+            {
+                
+                MoveToNextTile(blueStart.transform.position);
+
+            }
+            
+        }
+        
     }
 
     //Using coroutine instead of update method for optimazation
@@ -61,7 +93,4 @@ public class Player : MonoBehaviour
         return tile != (transform.position = Vector3.MoveTowards(transform.position, tile, 2f * Time.deltaTime));
         
     }
-
-
-    
 }

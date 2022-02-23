@@ -6,18 +6,15 @@ using UnityEngine;
 //Handling Blue Player collision
 public class PlayerCollision : MonoBehaviour
 {
+    //Refernce main player script
+    [SerializeField]
+    Player playerScript;
+    
+    internal bool atHome;
 
-    public Rigidbody bluePlayerRB;
-    public bool atHome;
-
-
-    private void Start()
-    {
-        bluePlayerRB = GetComponent<Rigidbody>();
-    }
 
     //Set the value of atHome if the player is on their home space
-    private void OnCollisionStay(Collision collision)
+    private void OnTriggerStay(Collider collision)
     {
         if (collision.gameObject.CompareTag("BlueHome"))
         {
@@ -26,7 +23,7 @@ public class PlayerCollision : MonoBehaviour
         }
     }
 
-    private void OnCollisionExit(Collision collision)
+    private void OnTriggerExit(Collider collision)
     {
         if (collision.gameObject.CompareTag("BlueHome"))
         {
