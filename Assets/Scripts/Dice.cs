@@ -39,6 +39,7 @@ public class Dice : MonoBehaviour
             hasLanded = true;
             rb.useGravity = false;
             DiceValueCheck();
+            Reset();
         }
     }
 
@@ -51,10 +52,6 @@ public class Dice : MonoBehaviour
             rb.useGravity = true;
             rb.AddTorque(Random.Range(0, 500), Random.Range(0, 500), Random.Range(0, 500));
         }
-        else if (thrown && hasLanded)
-        {
-            Reset();
-        }
     }
 
     //When player turn is done, or player needs to roll again (rolling a 6), set dice to starting position and variable values
@@ -64,14 +61,6 @@ public class Dice : MonoBehaviour
         thrown = false;
         hasLanded = false;
         rb.useGravity = false;
-    }
-
-    void RollAgain()
-    {
-        Reset();
-        thrown = true;
-        rb.useGravity = true;
-        rb.AddTorque(Random.Range(0, 500), Random.Range(0, 500), Random.Range(0, 500));
     }
 
     void DiceValueCheck()

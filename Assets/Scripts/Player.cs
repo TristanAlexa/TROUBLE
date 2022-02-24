@@ -7,12 +7,13 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
-    //How do i reference the Player collision script on the child gameobject to get the boolean atHome
+    //Reference first tile on route for blue player
     public GameObject blueStart;
 
     //Player Components
     public Rigidbody playerRB;
     public Route currentRoute;
+
     public int routePos;
     bool isMoving;
 
