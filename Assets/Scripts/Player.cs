@@ -58,6 +58,7 @@ public class Player : MonoBehaviour
             {
                 
                 MoveToNextTile(blueStart.transform.position);
+                
 
             }
             
