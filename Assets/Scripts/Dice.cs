@@ -1,4 +1,8 @@
-﻿using System.Collections;
+﻿/**
+ *  @file: Dice.cs
+ *  Rolls the dice, checks dice value, and resets die to be thrown again
+ */
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,7 +16,6 @@ public class Dice : MonoBehaviour
     Vector3 initPos;
 
     public static int diceValue;
-
     public DiceSide[] diceSides;
 
 
@@ -24,33 +27,29 @@ public class Dice : MonoBehaviour
         rb.useGravity = false;
     }
 
-    //Get user input to roll dice
-    private void Update()
-    {
-        //if (Input.touchCount > 0)
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            RollDice();
-        }
-
-        //allow dice to be reset if its not moving, and has been thrown.
-        if (rb.IsSleeping() && !hasLanded && thrown)
-        {
-            hasLanded = true;
-            rb.useGravity = false;
-            DiceValueCheck();
-            Reset();
-        }
-    }
-
-    //Allow dice to fall and spin randomly if dice can be thrown 
-    void RollDice()
+    //Allow dice to be thrown at the beginning of the turn
+    public void RollDice()
     {
         if(!thrown && !hasLanded)
         {
             thrown = true;
             rb.useGravity = true;
             rb.AddTorque(Random.Range(0, 500), Random.Range(0, 500), Random.Range(0, 500));
+        }
+    }
+
+    //Get the value of the DiceSide on the ground. Set equal to diceValue
+    void DiceValueCheck()
+    {
+        //diceValue = 0;
+        foreach (DiceSide side in diceSides)
+        {
+            if (side.OnGround())
+            {
+                diceValue = side.sideValue;
+                Debug.Log(diceValue + "has been rolled!");
+                //can bring this value into gamemanager, or player to move the player
+            }
         }
     }
 
@@ -63,18 +62,16 @@ public class Dice : MonoBehaviour
         rb.useGravity = false;
     }
 
-    void DiceValueCheck()
+    //If the dice was thrown on the player turn, check the value and reset the dice position
+    private void Update()
     {
-        diceValue = 0;
-        foreach (DiceSide side in diceSides)
+        if (rb.IsSleeping() && !hasLanded && thrown)
         {
-            if (side.OnGround())
-            {
-                diceValue = side.sideValue;
-                Debug.Log(diceValue + "has been rolled!");
-                //can bring this value into gamemanager, or player to move the player
-            }
+            hasLanded = true;
+            rb.useGravity = false;
+            DiceValueCheck();
+            Reset();
         }
     }
-        
+
 }

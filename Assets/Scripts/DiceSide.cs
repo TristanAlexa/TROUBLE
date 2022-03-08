@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DiceSide : MonoBehaviour
 {
-    //Collisions for dice sides
+    //Collision checks for dice sides
 
     bool onGround; //either true or false
     public int sideValue;

@@ -12,7 +12,6 @@ public class PlayerCollision : MonoBehaviour
     
     internal bool atHome;
 
-
     //Set the value of atHome if the player is on their home space
     private void OnTriggerStay(Collider collision)
     {
