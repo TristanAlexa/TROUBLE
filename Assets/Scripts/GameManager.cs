@@ -11,9 +11,18 @@ using UnityEngine.XR.ARSubsystems;
 using Assets;
 using UnityEngine.SceneManagement;
 
-//Use to keep track of score, player/game states (rolling die, moving player)
+
 public class GameManager : GenericSingleton<GameManager>
 {
+    /**
+     * public enum GameState {
+     *  Roll = 0,
+     *  Move = 1,
+     *  Win = 3;
+     *  }
+    */
+
+
    //Restart game can be called to reload the entire game
     public void RestartGame()
     {

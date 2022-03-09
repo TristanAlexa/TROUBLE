@@ -35,7 +35,7 @@ public class Player : MonoBehaviour
     //Updates player position along board according to dice values
     private void Update()
     {
-        //Movement along the active playing route ->CURRENT CONDITIONS DO NOT STOP PLAYER FROM MOVING AFTER LEAVING HOME
+        //Movement along the active playing route 
         if (!isMoving && !collisionScript.atHome)
         {
             //Avoiding overflow if routePos+DiceSideValue is greater than the amount of spaces left to move
@@ -50,18 +50,20 @@ public class Player : MonoBehaviour
             }
         }
         
-        //Movement from home space to start space.
+        //Movement from home space to start space on the route.
         else if (!isMoving && collisionScript.atHome)
         {
         
             if(Dice.diceValue == 6)
             {
-                
                 MoveToNextTile(blueStart.transform.position);
-                
-
             }
             
+        }
+        //When player first collides with start tile. Stop continued movement
+        else if (isMoving && collisionScript.enteredStart)
+        {
+            Dice.diceValue = 0;
         }
         
     }

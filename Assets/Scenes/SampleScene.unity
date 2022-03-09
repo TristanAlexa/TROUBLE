@@ -1933,7 +1933,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54fe835a8294b4f96afe338a750a102f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  blueStart: {fileID: 0}
+  blueStart: {fileID: 829986884}
   playerRB: {fileID: 767070443}
   currentRoute: {fileID: 719423901}
   routePos: 0
@@ -2194,7 +2194,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 829986884}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
@@ -4572,7 +4572,7 @@ PrefabInstance:
     - target: {fileID: 6667266439265224995, guid: 862158fd1377c4d159d1e8afa344907a,
         type: 3}
       propertyPath: m_Name
-      value: Board_Tile (28)
+      value: Board_BlueHome (28)
       objectReference: {fileID: 0}
     - target: {fileID: 6667266439265224995, guid: 862158fd1377c4d159d1e8afa344907a,
         type: 3}
