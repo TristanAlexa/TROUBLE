@@ -10,13 +10,15 @@ public class Dice : MonoBehaviour
 {
     public Rigidbody rb;
 
-    bool hasLanded;
-    bool thrown;
+    public bool hasLanded;
+    public bool thrown;
 
     Vector3 initPos;
 
     public static int diceValue;
     public DiceSide[] diceSides;
+
+    GameManager GM;
 
 
     //get the rb component of dice, and starting position in air to drop dice from
@@ -25,6 +27,8 @@ public class Dice : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         initPos = transform.position;
         rb.useGravity = false;
+
+        GM = FindObjectOfType<GameManager>();
     }
 
     //Allow dice to be thrown at the beginning of the turn
@@ -54,7 +58,7 @@ public class Dice : MonoBehaviour
     }
 
     //When player turn is done, or player needs to roll again (rolling a 6), set dice to starting position and variable values
-    private void Reset()
+    public void Reset()
     {
         transform.position = initPos;
         thrown = false;
@@ -68,9 +72,11 @@ public class Dice : MonoBehaviour
         if (rb.IsSleeping() && !hasLanded && thrown)
         {
             hasLanded = true;
+            Debug.Log("dice haslanded");
             rb.useGravity = false;
             DiceValueCheck();
-            Reset();
+            GM.currentState = GameState.Move;
+            //Reset(); want to call this in GM
         }
     }
 

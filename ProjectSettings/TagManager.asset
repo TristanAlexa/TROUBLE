@@ -10,6 +10,7 @@ TagManager:
   - Dice
   - Ground
   - BlueStart
+  - ButtonCanvas
   layers:
   - Default
   - TransparentFX

@@ -872,6 +872,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b168ee2602a5488abe1e511647d83bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentState: 0
+  buttonCanvas: {fileID: 0}
+  diceScript: {fileID: 6801955794505058541}
 --- !u!4 &305008243
 Transform:
   m_ObjectHideFlags: 0
@@ -991,9 +994,10 @@ GameObject:
   - component: {fileID: 432308179}
   - component: {fileID: 432308178}
   - component: {fileID: 432308177}
+  - component: {fileID: 432308181}
   m_Layer: 5
-  m_Name: Canvas
-  m_TagString: Untagged
+  m_Name: ButtonCanvas
+  m_TagString: ButtonCanvas
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1078,6 +1082,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!225 &432308181
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 432308176}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &517178521 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7141684851996478524, guid: d4d69f835c71a498789623a61557f332,
@@ -4600,6 +4616,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 0}
+  hasLanded: 0
+  thrown: 0
   diceSides:
   - {fileID: 719877963}
   - {fileID: 517178526}
