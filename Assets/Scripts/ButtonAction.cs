@@ -1,6 +1,6 @@
 ﻿/**
  * @file: ButtonAction.cs
- * Handles button functionality and state management
+ *        Handles button functionality and state management
  */
 using System.Collections;
 using System.Collections.Generic;
@@ -14,7 +14,7 @@ public class ButtonAction : MonoBehaviour
     GameObject endTurnButton;
     GameManager GM;
 
-    //Find the all referenced GameObject in scene
+    //Find all referenced GameObjects in scene
     void Start()
     {
         rollDiceButton = GameObject.Find("RollDie");
@@ -25,18 +25,17 @@ public class ButtonAction : MonoBehaviour
     }
 
     //After roll dice is pressed change visible state of buttons
-    public void ButtonPressed()
+    public void RollDiePressed()
     {
         rollDiceButton.SetActive(false);
         endTurnButton.SetActive(true);
     }
 
     //On end turn pressed, change game and button states
-    public void endTurnPressed()
+    public void EndTurnPressed()
     {
         endTurnButton.SetActive(false);
         rollDiceButton.SetActive(true);
-
         
         GM.currentState = GameState.Roll;
     }

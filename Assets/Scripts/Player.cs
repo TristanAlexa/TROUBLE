@@ -7,29 +7,25 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
-    //Reference first tile on route for blue player
-    public GameObject blueStart;
-
-    //Player Components
+    //Player Components and references
     public Rigidbody playerRB;
-    public Route currentRoute;
-
     public int routePos;
     bool isMoving;
 
-    //Refernce sub-scripts
+    //Other gameobject referecnes
+    public Route currentRoute;
+    public GameObject blueStart;
+
+    //Sub-scripts references
     [SerializeField]
     internal PlayerCollision collisionScript;
 
-    //Use in onTriggerEvent to send player back if land on same pos
+    public Dice diceScript;
 
     private void Start()
     {
-        if (blueStart == null)
-        {
-            blueStart = GameObject.FindGameObjectWithTag("BlueStart");
-            Debug.Log("Blue start is available");
-        }
+        blueStart = GameObject.FindGameObjectWithTag("BlueStart");
+        Debug.Log("Blue start is available");
     }
 
     //Updates player position along board according to dice values
@@ -45,7 +41,7 @@ public class Player : MonoBehaviour
             }
             else
             {
-                //Or go to next player turn
+                //If this happens, no moves are available. Tell the player, thus presses end turn/////
                 Debug.Log("rolled number is too high!");
             }
         }
@@ -57,15 +53,10 @@ public class Player : MonoBehaviour
             if(Dice.diceValue == 6)
             {
                 MoveToNextTile(blueStart.transform.position);
+                Dice.diceValue = 1;
             }
             
         }
-        //When player first collides with start tile. Stop continued movement
-        else if (isMoving && collisionScript.enteredStart)
-        {
-            Dice.diceValue = 0;
-        }
-        
     }
 
     //Using coroutine instead of update method for optimazation

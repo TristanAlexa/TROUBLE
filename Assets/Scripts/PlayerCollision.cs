@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
 //Handling Blue Player collision
 public class PlayerCollision : MonoBehaviour
 {
@@ -19,7 +18,7 @@ public class PlayerCollision : MonoBehaviour
         if (collision.gameObject.CompareTag("BlueHome"))
         {
             atHome = true;
-            //Debug.Log("Blue Player is at home");
+            Debug.Log("Blue at home");
         }
     }
 
@@ -29,8 +28,9 @@ public class PlayerCollision : MonoBehaviour
         if (other.gameObject.CompareTag("BlueStart"))
         {
             enteredStart = true;
-            //Debug.Log("Blue Player entered start tile");
         }
+
+        //Use in onTriggerEvent to send player back if land on same pos
     }
 
     //Set collision values to false when player leaves specific tiles
@@ -39,15 +39,12 @@ public class PlayerCollision : MonoBehaviour
         if (collision.gameObject.CompareTag("BlueHome"))
         {
             atHome = false;
-            //Debug.Log("Blue Player has left home");
         }
 
         if (collision.gameObject.CompareTag("BlueStart"))
         {
             enteredStart = false;
-            //Debug.Log("Blue Player has left start");
         }
-
     }
 
     //returns T/F value of collision with specific tiles
@@ -56,7 +53,6 @@ public class PlayerCollision : MonoBehaviour
         return atHome;
     }
 
-    
     public bool EnteredStart()
     {
         return enteredStart;

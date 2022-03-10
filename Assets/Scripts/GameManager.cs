@@ -1,6 +1,6 @@
 ﻿/**
     @file: GameManager.cs
-    Tracking game states and player states. Prints U.I.
+    Tracking game states and player states.
  */
 
 using System.Collections;
@@ -12,7 +12,7 @@ using Assets;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public enum GameState { Roll, Move, Win}; //
+public enum GameState { Roll, Move, Win}; 
 
 public class GameManager : GenericSingleton<GameManager>
 {
@@ -21,6 +21,7 @@ public class GameManager : GenericSingleton<GameManager>
 
     //Script References
     public Dice diceScript;
+    public Player playerScript;
 
     private void Start()
     {
@@ -34,16 +35,11 @@ public class GameManager : GenericSingleton<GameManager>
         {
             case GameState.Roll:
                 Debug.Log("GameState = Roll");
-                if (!diceScript.hasLanded)
-                {
-                    
-                }
                 break;
 
             case GameState.Move:
-                Debug.Log("GameState = Move");
-                    
-                    diceScript.Reset();
+                Debug.Log("GameState = Move");    
+                diceScript.Reset();
                 break;
 
             default:
