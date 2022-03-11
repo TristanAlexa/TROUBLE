@@ -13,6 +13,9 @@ TagManager:
   - ButtonCanvas
   - RollButton
   - BluePlayer2
+  - RedStart
+  - RedHome
+  - RedFinish
   layers:
   - Default
   - TransparentFX

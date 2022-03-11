@@ -1,41 +1,44 @@
-﻿using System.Collections;
+﻿/**
+ * @file: RedPlayer.cs
+ *        Main Red player script to calculates movement along board
+ */
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
 using UnityEngine.UI;
 
-public class Player : MonoBehaviour
+public class RedPlayer : MonoBehaviour
 {
     //Player Components and references
     public Rigidbody playerRB;
     public int routePos;
     bool isMoving;
-    
-    public GameObject bluePlayer1;
-    public GameObject bluePlayer2;
+
+    public GameObject redPlayer;
 
     //Other gameobject referecnes
     public Route currentRoute;
-    public GameObject blueStart;
+    public GameObject redStart;
 
     //Sub-scripts references
     [SerializeField]
-    internal PlayerCollision collisionScript;
-
+    internal RedPlayerCollision collisionScript;
     public Dice diceScript;
 
-    private void Start()
+    // Start is called before the first frame update
+    void Start()
     {
-        blueStart = GameObject.FindGameObjectWithTag("BlueStart");
+        redStart = GameObject.FindGameObjectWithTag("RedStart");
+        redPlayer = GameObject.Find("RedPlayer");
     }
 
-  
     //Moves player postition along board according to dice values
     public void MovePlayer()
     {
         //Movement along the active playing route 
-        if (!isMoving && !collisionScript.atHome)
+        if (!isMoving && !collisionScript.redAtHome)
         {
             //Avoiding overflow if routePos+DiceSideValue is greater than the amount of spaces left to move
             if (routePos + Dice.diceValue < currentRoute.childNodeList.Count)
@@ -49,20 +52,21 @@ public class Player : MonoBehaviour
         }
 
         //Movement from home space to start space on the route.
-        else if (!isMoving && collisionScript.atHome)
+        else if (!isMoving && collisionScript.redAtHome)
         {
 
             if (Dice.diceValue == 6)
             {
-                                            //Good place for animation///
+                //Good place for animation///
 
-                transform.position = blueStart.transform.position; //transform pos of child game object to specific start?????????
+                transform.position = redStart.transform.position;
+
                 Dice.diceValue = 0;
             }
 
             else
             {
-                Debug.Log("NO moves! End turn");  //Show in UI
+               // Debug.Log("NO moves! End turn");  //Show in UI
             }
 
         }

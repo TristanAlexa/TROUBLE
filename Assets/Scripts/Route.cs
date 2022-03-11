@@ -1,11 +1,13 @@
-﻿using System.Collections;
+﻿/**
+ * @file: Route.cs
+ *        Calculates the route each player will take around board
+ */
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
 
-//BlueRoute Class attached to blue player
-//Make new route class
 public class Route : MonoBehaviour
 {
     //Calculate route. Using an array of all the route positions

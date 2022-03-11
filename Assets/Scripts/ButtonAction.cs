@@ -18,8 +18,8 @@ public class ButtonAction : MonoBehaviour
 
     //Other referecnes
     GameManager GM;
-    GameObject bluePlayer1;
-    GameObject bluePlayer2;
+    GameObject bluePlayer;
+    GameObject redPlayer;
 
     //Find all referenced GameObjects in scene. Set initial button visibility
     void Start()
@@ -28,8 +28,8 @@ public class ButtonAction : MonoBehaviour
         endTurnButton = GameObject.Find("EndTurn");
         player1MoveButton = GameObject.Find("BluePlayer1Button");
         player2MoveButton = GameObject.Find("BluePlayer2Button");
-        bluePlayer1 = GameObject.Find("BluePlayer");
-        bluePlayer2 = GameObject.Find("BluePlayer2");
+        bluePlayer = GameObject.Find("BluePlayer");
+        redPlayer = GameObject.Find("RedPlayer");
 
         endTurnButton.SetActive(false);
         player1MoveButton.SetActive(false);
@@ -59,7 +59,7 @@ public class ButtonAction : MonoBehaviour
     public void Player1MovePressed()
     {
         //call move function from blue game object
-        bluePlayer1.GetComponent<Player>().MovePlayer();
+        bluePlayer.GetComponent<Player>().MovePlayer();
         player1MoveButton.SetActive(false);
         endTurnButton.SetActive(true);
     }
@@ -68,7 +68,7 @@ public class ButtonAction : MonoBehaviour
     public void Player2MovePressed()
     {
         //call move fucntion from
-        bluePlayer2.GetComponent<Player>().MovePlayer();
+        redPlayer.GetComponent<RedPlayer>().MovePlayer();
         player2MoveButton.SetActive(false);
         endTurnButton.SetActive(true);
     }
@@ -78,7 +78,6 @@ public class ButtonAction : MonoBehaviour
     {
         endTurnButton.SetActive(false);
         rollDiceButton.SetActive(true);
-
 
         //switch to next player turn
         if (GM.currentState == GameState.Player1Turn)

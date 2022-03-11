@@ -32,7 +32,7 @@ public class GameManager : GenericSingleton<GameManager>
     private void Start()
     {
 
-        currentState = GameState.Player1Turn;
+        currentState = GameState.Player2Turn;
         
     }
 
