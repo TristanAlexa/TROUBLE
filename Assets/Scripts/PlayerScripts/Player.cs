@@ -73,6 +73,11 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void MoveBackHome()
+    {
+
+    }
+
     //Using coroutine instead of update method for optimization
     IEnumerator Move()
     {

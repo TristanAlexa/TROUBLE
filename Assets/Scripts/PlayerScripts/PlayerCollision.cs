@@ -6,12 +6,21 @@ using UnityEngine;
 
 public class PlayerCollision : MonoBehaviour
 {
+    
     //Refernce main player script
     [SerializeField]
     Player playerScript;
     
     internal bool atHome;
-   
+
+    //other ref.
+    GameManager GM;
+
+    private void Start()
+    {
+        GM = FindObjectOfType<GameManager>();
+    }
+
     //Set the value of atHome if the player is on their home space
     private void OnTriggerStay(Collider collision)
     {
@@ -25,7 +34,10 @@ public class PlayerCollision : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        //Use in onTriggerEvent to send player back if land on same pos
+        if (other.gameObject.CompareTag("BlueFinish"))
+        {
+            GM.currentState = GameState.BlueWin;
+        }
     }
 
     //Set collision values to false when player leaves specific tiles

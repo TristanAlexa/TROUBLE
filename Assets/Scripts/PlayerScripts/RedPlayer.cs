@@ -66,7 +66,7 @@ public class RedPlayer : MonoBehaviour
 
             else
             {
-               // Debug.Log("NO moves! End turn");  //Show in UI
+               Debug.Log("NO moves! End turn");  //Show in UI
             }
 
         }

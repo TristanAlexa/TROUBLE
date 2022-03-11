@@ -9,6 +9,16 @@ public class RedPlayerCollision : MonoBehaviour
 
     internal bool redAtHome;
 
+    //Other ref.
+    GameManager GM;
+    GameObject bluePlayer;
+
+    private void Start()
+    {
+        GM = FindObjectOfType<GameManager>();
+        bluePlayer = GameObject.Find("BluePlayer");
+    }
+
     //Set the value of atHome if the player is on their home space
     private void OnTriggerStay(Collider collision)
     {
@@ -23,7 +33,13 @@ public class RedPlayerCollision : MonoBehaviour
     
     private void OnTriggerEnter(Collider other)
     {
-        //Use in onTriggerEvent to send player back if land on same pos
+        if (other.gameObject.CompareTag("RedFinish"))
+        {
+            GM.currentState = GameState.BlueWin;
+        }
+
+       //if moveback home function was here. The player would be sent home when pther player passes by.
+       //Instead only move back home when player stops moving on it.
     }
 
     //Set collision values to false when player leaves specific tiles

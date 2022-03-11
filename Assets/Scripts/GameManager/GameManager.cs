@@ -2,7 +2,6 @@
     @file: GameManager.cs
     Tracking game states and player states.
  */
-
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,29 +10,29 @@ using UnityEngine.XR.ARSubsystems;
 using Assets;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
-public enum GameState {Player1Turn, Player2Turn, Win}; 
+public enum GameState {Player1Turn, Player2Turn, BlueWin, RedWin}; 
 
-//set player pawns to variable numbers ie, 1,2,3,4. Can do 1 pawn per player
-//Start with first player, on end turn button -> switch to the other player turn
-//In Player.cs instead of move(coroutine) in Update, add a separate function for allowing movement.
-//Button Action Roll button should initiate roll game state?????
-//In game manager roll, whichever pawn turn it is call the move function for that pawn
 public class GameManager : GenericSingleton<GameManager>
 {
     //used to change state of game
     public GameState currentState;
-    public int playerTurn;
+    
 
     //Script References
     public Dice diceScript;
     public Player playerScript;
 
+    //Text references
+    public TextMeshProUGUI redWinsText;
+    public TextMeshProUGUI blueWinsText;
+
     private void Start()
     {
-
-        currentState = GameState.Player2Turn;
-        
+        currentState = GameState.Player1Turn;
+        redWinsText.gameObject.SetActive(false);
+        blueWinsText.gameObject.SetActive(false);
     }
 
     //Game state code is immediately executed when when a new game state is called
@@ -43,12 +42,20 @@ public class GameManager : GenericSingleton<GameManager>
         {
             case GameState.Player1Turn:
                 Debug.Log("GameState = Blue's Turn");
-                playerTurn = 1;
                 break;
 
             case GameState.Player2Turn:
                 Debug.Log("GameState = Red's Turn");
-                playerTurn = 2;
+                break;
+
+            case GameState.BlueWin:
+                //UI Blue player wins
+                blueWinsText.gameObject.SetActive(true);
+                break;
+
+            case GameState.RedWin:
+                //UI Red player wins
+                redWinsText.gameObject.SetActive(true);
                 break;
 
             default:
