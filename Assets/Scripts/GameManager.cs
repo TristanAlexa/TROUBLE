@@ -12,12 +12,18 @@ using Assets;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public enum GameState { Roll, Move, Win}; 
+public enum GameState {Player1Turn, Player2Turn, Win}; 
 
+//set player pawns to variable numbers ie, 1,2,3,4. Can do 1 pawn per player
+//Start with first player, on end turn button -> switch to the other player turn
+//In Player.cs instead of move(coroutine) in Update, add a separate function for allowing movement.
+//Button Action Roll button should initiate roll game state?????
+//In game manager roll, whichever pawn turn it is call the move function for that pawn
 public class GameManager : GenericSingleton<GameManager>
 {
     //used to change state of game
     public GameState currentState;
+    public int playerTurn;
 
     //Script References
     public Dice diceScript;
@@ -25,7 +31,9 @@ public class GameManager : GenericSingleton<GameManager>
 
     private void Start()
     {
-        currentState = GameState.Roll;
+
+        currentState = GameState.Player1Turn;
+        
     }
 
     //Game state code is immediately executed when when a new game state is called
@@ -33,13 +41,14 @@ public class GameManager : GenericSingleton<GameManager>
     {
         switch (currentState)
         {
-            case GameState.Roll:
-                Debug.Log("GameState = Roll");
+            case GameState.Player1Turn:
+                Debug.Log("GameState = Blue's Turn");
+                playerTurn = 1;
                 break;
 
-            case GameState.Move:
-                Debug.Log("GameState = Move");    
-                diceScript.Reset();
+            case GameState.Player2Turn:
+                Debug.Log("GameState = Red's Turn");
+                playerTurn = 2;
                 break;
 
             default:

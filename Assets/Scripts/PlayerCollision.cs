@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 //Handling Blue Player collision
+
+//Need 2 more specific player player collision scripts, to check collision between the two players
 public class PlayerCollision : MonoBehaviour
 {
     //Refernce main player script
@@ -18,7 +20,7 @@ public class PlayerCollision : MonoBehaviour
         if (collision.gameObject.CompareTag("BlueHome"))
         {
             atHome = true;
-            Debug.Log("Blue at home");
+            Debug.Log("This pawn is at home:" +gameObject.name);
         }
     }
 

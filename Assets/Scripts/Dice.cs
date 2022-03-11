@@ -9,19 +9,17 @@ using UnityEngine;
 public class Dice : MonoBehaviour
 {
     public Rigidbody rb;
-
     public bool hasLanded;
     public bool thrown;
 
     Vector3 initPos;
-
     public static int diceValue;
     public DiceSide[] diceSides;
 
     GameManager GM;
 
 
-    //get the rb component of dice, and starting position in air to drop dice from
+    //Get the rb component of dice, and starting position in air to drop dice from
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -45,14 +43,12 @@ public class Dice : MonoBehaviour
     //Get the value of the DiceSide on the ground. Set equal to diceValue
     void DiceValueCheck()
     {
-        //diceValue = 0;
         foreach (DiceSide side in diceSides)
         {
             if (side.OnGround())
             {
                 diceValue = side.sideValue;
                 Debug.Log(diceValue + "has been rolled!");
-                //can bring this value into gamemanager, or player to move the player
             }
         }
     }
@@ -66,17 +62,14 @@ public class Dice : MonoBehaviour
         rb.useGravity = false;
     }
 
-    //If the dice was thrown on the player turn, check the value and reset the dice position
+    //Check value of dice after it was thrown
     private void Update()
     {
         if (rb.IsSleeping() && !hasLanded && thrown)
         {
             hasLanded = true;
-            Debug.Log("dice haslanded");
             rb.useGravity = false;
             DiceValueCheck();
-            GM.currentState = GameState.Move;
-            //Reset(); want to call this in GM
         }
     }
 

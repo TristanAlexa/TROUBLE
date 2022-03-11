@@ -12,6 +12,7 @@ TagManager:
   - BlueStart
   - ButtonCanvas
   - RollButton
+  - BluePlayer2
   layers:
   - Default
   - TransparentFX

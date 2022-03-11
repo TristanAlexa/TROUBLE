@@ -11,6 +11,9 @@ public class Player : MonoBehaviour
     public Rigidbody playerRB;
     public int routePos;
     bool isMoving;
+    
+    public GameObject bluePlayer1;
+    public GameObject bluePlayer2;
 
     //Other gameobject referecnes
     public Route currentRoute;
@@ -25,11 +28,11 @@ public class Player : MonoBehaviour
     private void Start()
     {
         blueStart = GameObject.FindGameObjectWithTag("BlueStart");
-        Debug.Log("Blue start is available");
     }
 
-    //Updates player position along board according to dice values
-    private void Update()
+  
+    //Moves player postition along board according to dice values
+    public void MovePlayer()
     {
         //Movement along the active playing route 
         if (!isMoving && !collisionScript.atHome)
@@ -41,25 +44,31 @@ public class Player : MonoBehaviour
             }
             else
             {
-                //If this happens, no moves are available. Tell the player, thus presses end turn/////
-                Debug.Log("rolled number is too high!");
+                Debug.Log("NO moves! End turn");
             }
         }
-        
+
         //Movement from home space to start space on the route.
         else if (!isMoving && collisionScript.atHome)
         {
-        
-            if(Dice.diceValue == 6)
+
+            if (Dice.diceValue == 6)
             {
-                MoveToNextTile(blueStart.transform.position);
-                Dice.diceValue = 1;
+                                            //Good place for animation///
+
+                transform.position = blueStart.transform.position; //transform pos of child game object to specific start?????????
+                Dice.diceValue = 0;
             }
-            
+
+            else
+            {
+                Debug.Log("NO moves! End turn");  //Show in UI
+            }
+
         }
     }
 
-    //Using coroutine instead of update method for optimazation
+    //Using coroutine instead of update method for optimization
     IEnumerator Move()
     {
         if (isMoving)
@@ -68,7 +77,7 @@ public class Player : MonoBehaviour
         }
         isMoving = true;
 
-        //Allowing movement of player
+        //Allowing movement of player along route using rolled die value
         while (Dice.diceValue > 0)
         {
             Vector3 nextPos = currentRoute.childNodeList[routePos + 1].position;
@@ -82,10 +91,9 @@ public class Player : MonoBehaviour
         isMoving = false;
     }
 
+    //Checks if the tile to move towards is available
     bool MoveToNextTile(Vector3 tile)
     {
-        //Checking if a player is already moving.
         return tile != (transform.position = Vector3.MoveTowards(transform.position, tile, 2f * Time.deltaTime));
-        
     }
 }
