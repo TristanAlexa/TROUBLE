@@ -8,6 +8,7 @@ using UnityEngine;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
 using UnityEngine.UI;
+using TMPro;
 
 public class Player : MonoBehaviour
 {
@@ -15,12 +16,13 @@ public class Player : MonoBehaviour
     public Rigidbody playerRB;
     public int routePos;
     bool isMoving;
-
     public GameObject bluePlayer;
 
     //Other gameobject referecnes
     public Route currentRoute;
     public GameObject blueStart;
+    public TextMeshProUGUI rollSixText;
+    public TextMeshProUGUI noMovesText;
 
     //Sub-scripts references
     [SerializeField]
@@ -32,6 +34,8 @@ public class Player : MonoBehaviour
     {
         blueStart = GameObject.FindGameObjectWithTag("BlueStart");
         bluePlayer = GameObject.Find("BluePlayer");
+        rollSixText.gameObject.SetActive(false);
+        noMovesText.gameObject.SetActive(false);
     }
 
 
@@ -48,7 +52,7 @@ public class Player : MonoBehaviour
             }
             else
             {
-                Debug.Log("NO moves! End turn");
+                StartCoroutine(TempActivateNoMoves(2));
             }
         }
 
@@ -67,7 +71,7 @@ public class Player : MonoBehaviour
 
             else
             {
-                Debug.Log("NO moves! End turn");  //Show in UI
+                StartCoroutine(TempActivateRollSix(3));
             }
 
         }
@@ -78,7 +82,7 @@ public class Player : MonoBehaviour
 
     }
 
-    //Using coroutine instead of update method for optimization
+    //coroutine finds the next tile on the route to move to
     IEnumerator Move()
     {
         if (isMoving)
@@ -106,4 +110,20 @@ public class Player : MonoBehaviour
     {
         return tile != (transform.position = Vector3.MoveTowards(transform.position, tile, 2f * Time.deltaTime));
     }
+
+    //Temporariliy Activate "help" text during rolls
+    private IEnumerator TempActivateRollSix(float duration)
+    {
+        rollSixText.gameObject.SetActive(true);
+        yield return new WaitForSeconds(duration);
+        rollSixText.gameObject.SetActive(false);
+    }
+
+    private IEnumerator TempActivateNoMoves(float duration)
+    {
+        noMovesText.gameObject.SetActive(true);
+        yield return new WaitForSeconds(duration);
+        noMovesText.gameObject.SetActive(false);
+    }
+
 }

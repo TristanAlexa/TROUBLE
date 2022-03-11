@@ -46,6 +46,7 @@ public class ButtonAction : MonoBehaviour
 
         if (GM.currentState == GameState.Player1Turn)
         {
+
             player1MoveButton.SetActive(true);
         }
 

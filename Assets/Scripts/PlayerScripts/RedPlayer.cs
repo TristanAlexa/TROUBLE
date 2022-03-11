@@ -8,6 +8,7 @@ using UnityEngine;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
 using UnityEngine.UI;
+using TMPro;
 
 public class RedPlayer : MonoBehaviour
 {
@@ -15,12 +16,13 @@ public class RedPlayer : MonoBehaviour
     public Rigidbody playerRB;
     public int routePos;
     bool isMoving;
-
     public GameObject redPlayer;
 
     //Other gameobject referecnes
     public Route currentRoute;
     public GameObject redStart;
+    public TextMeshProUGUI rollSixText;
+    public TextMeshProUGUI noMovesText;
 
     //Sub-scripts references
     [SerializeField]
@@ -47,7 +49,7 @@ public class RedPlayer : MonoBehaviour
             }
             else
             {
-                Debug.Log("NO moves! End turn");
+                StartCoroutine(TempActivateNoMoves(2));
             }
         }
 
@@ -66,7 +68,7 @@ public class RedPlayer : MonoBehaviour
 
             else
             {
-               Debug.Log("NO moves! End turn");  //Show in UI
+                StartCoroutine(TempActivateRollSix(3));
             }
 
         }
@@ -99,5 +101,20 @@ public class RedPlayer : MonoBehaviour
     bool MoveToNextTile(Vector3 tile)
     {
         return tile != (transform.position = Vector3.MoveTowards(transform.position, tile, 2f * Time.deltaTime));
+    }
+
+    //Temporariliy Activate "help" text during rolls
+    private IEnumerator TempActivateRollSix(float duration)
+    {
+        rollSixText.gameObject.SetActive(true);
+        yield return new WaitForSeconds(duration);
+        rollSixText.gameObject.SetActive(false);
+    }
+
+    private IEnumerator TempActivateNoMoves(float duration)
+    {
+        //noMovesText.SetActive(true);
+        yield return new WaitForSeconds(duration);
+        //noMovesText.SetActive(false);
     }
 }
