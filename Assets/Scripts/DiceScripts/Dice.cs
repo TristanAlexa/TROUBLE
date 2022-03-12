@@ -16,7 +16,8 @@ public class Dice : MonoBehaviour
     public static int diceValue;
     public DiceSide[] diceSides;
 
-    GameManager GM;
+    //Audio ref
+    public AudioSource rollDieSound;
 
 
     //Get the rb component of dice, and starting position in air to drop dice from
@@ -25,8 +26,6 @@ public class Dice : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         initPos = transform.position;
         rb.useGravity = false;
-
-        GM = FindObjectOfType<GameManager>();
     }
 
     //Allow dice to be thrown at the beginning of the turn
@@ -37,6 +36,12 @@ public class Dice : MonoBehaviour
             thrown = true;
             rb.useGravity = true;
             rb.AddTorque(Random.Range(0, 500), Random.Range(0, 500), Random.Range(0, 500));
+
+            //Play sound
+            if (!rollDieSound.isPlaying)
+            {
+                rollDieSound.Play();
+            }
         }
     }
 

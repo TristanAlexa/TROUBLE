@@ -27,9 +27,7 @@ public class PlayerCollision : MonoBehaviour
         if (collision.gameObject.CompareTag("BlueHome"))
         {
             atHome = true;
-            Debug.Log("This pawn is at home:" +gameObject.name);
         }
-
     }
 
     private void OnTriggerEnter(Collider other)

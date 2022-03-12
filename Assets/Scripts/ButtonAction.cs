@@ -15,12 +15,13 @@ public class ButtonAction : MonoBehaviour
     GameObject endTurnButton;
     GameObject player1MoveButton;
     GameObject player2MoveButton;
+    GameObject restartGameButton;
 
     //Other referecnes
     GameManager GM;
     GameObject bluePlayer;
     GameObject redPlayer;
-
+    
     //Find all referenced GameObjects in scene. Set initial button visibility
     void Start()
     {
@@ -30,12 +31,15 @@ public class ButtonAction : MonoBehaviour
         player2MoveButton = GameObject.Find("BluePlayer2Button");
         bluePlayer = GameObject.Find("BluePlayer");
         redPlayer = GameObject.Find("RedPlayer");
+        restartGameButton = GameObject.Find("RestartGameButton");
 
         endTurnButton.SetActive(false);
         player1MoveButton.SetActive(false);
         player2MoveButton.SetActive(false);
+        restartGameButton.SetActive(false);
 
         GM = FindObjectOfType<GameManager>();
+
     }
 
     //After roll dice is pressed show a move Red or Blue player button
@@ -46,7 +50,6 @@ public class ButtonAction : MonoBehaviour
 
         if (GM.currentState == GameState.Player1Turn)
         {
-
             player1MoveButton.SetActive(true);
         }
 
@@ -68,9 +71,10 @@ public class ButtonAction : MonoBehaviour
     //Move red pawn if able and reveal end turn button
     public void Player2MovePressed()
     {
-        //call move fucntion from
+        
         redPlayer.GetComponent<RedPlayer>().MovePlayer();
         player2MoveButton.SetActive(false);
+
         endTurnButton.SetActive(true);
     }
 
@@ -90,5 +94,23 @@ public class ButtonAction : MonoBehaviour
         {
             GM.currentState = GameState.Player1Turn;
         }
+
+        //Show restart game button if in winning state
+        else if (GM.currentState == GameState.RedWin)
+        {
+            restartGameButton.SetActive(true);
+        }
+        else if (GM.currentState == GameState.BlueWin)
+        {
+            restartGameButton.SetActive(true);
+        }
+    }
+
+    //Restart game can be called to reload the entire game
+    public void RestartGamePressed()
+    {
+        GM.currentState = GameState.End;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        restartGameButton.SetActive(false);
     }
 }

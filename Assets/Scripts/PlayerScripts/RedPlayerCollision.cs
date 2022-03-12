@@ -11,12 +11,10 @@ public class RedPlayerCollision : MonoBehaviour
 
     //Other ref.
     GameManager GM;
-    GameObject bluePlayer;
 
     private void Start()
     {
         GM = FindObjectOfType<GameManager>();
-        bluePlayer = GameObject.Find("BluePlayer");
     }
 
     //Set the value of atHome if the player is on their home space
@@ -26,20 +24,15 @@ public class RedPlayerCollision : MonoBehaviour
         if (collision.gameObject.CompareTag("RedHome"))
         {
             redAtHome = true;
-            Debug.Log("This pawn is at home:" + gameObject.name);
         }
     }
 
-    
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("RedFinish"))
         {
-            GM.currentState = GameState.BlueWin;
+            GM.currentState = GameState.RedWin;
         }
-
-       //if moveback home function was here. The player would be sent home when pther player passes by.
-       //Instead only move back home when player stops moving on it.
     }
 
     //Set collision values to false when player leaves specific tiles
@@ -48,7 +41,6 @@ public class RedPlayerCollision : MonoBehaviour
         if (collision.gameObject.CompareTag("RedHome"))
         {
             redAtHome = false;
-            Debug.Log("This pawn left home:" + gameObject.name);
         }
     }
 

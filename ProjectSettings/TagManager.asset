@@ -16,6 +16,7 @@ TagManager:
   - RedStart
   - RedHome
   - RedFinish
+  - RedPlayer
   layers:
   - Default
   - TransparentFX

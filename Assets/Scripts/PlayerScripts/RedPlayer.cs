@@ -56,16 +56,13 @@ public class RedPlayer : MonoBehaviour
         //Movement from home space to start space on the route.
         else if (!isMoving && collisionScript.redAtHome)
         {
-
+            //Send player to start space if at home and rolled a 6
             if (Dice.diceValue == 6)
             {
-                //Good place for animation///
-
                 transform.position = redStart.transform.position;
-
                 Dice.diceValue = 0;
             }
-
+            //If no moves available show "help" UI
             else
             {
                 StartCoroutine(TempActivateRollSix(3));
@@ -113,8 +110,8 @@ public class RedPlayer : MonoBehaviour
 
     private IEnumerator TempActivateNoMoves(float duration)
     {
-        //noMovesText.SetActive(true);
+        noMovesText.gameObject.SetActive(true);
         yield return new WaitForSeconds(duration);
-        //noMovesText.SetActive(false);
+        noMovesText.gameObject.SetActive(false);
     }
 }

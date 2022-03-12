@@ -38,7 +38,6 @@ public class Player : MonoBehaviour
         noMovesText.gameObject.SetActive(false);
     }
 
-
     //Moves player postition along board according to dice values
     public void MovePlayer()
     {
@@ -65,7 +64,6 @@ public class Player : MonoBehaviour
                 //Good place for animation///
 
                 transform.position = blueStart.transform.position;
-
                 Dice.diceValue = 0;
             }
 
@@ -75,11 +73,6 @@ public class Player : MonoBehaviour
             }
 
         }
-    }
-
-    public void MoveBackHome()
-    {
-
     }
 
     //coroutine finds the next tile on the route to move to
@@ -99,6 +92,7 @@ public class Player : MonoBehaviour
 
             yield return new WaitForSeconds(0.1f);
             Dice.diceValue -= 1;
+
             routePos += 1;
         }
 
