@@ -18,7 +18,7 @@ public class ButtonAction : MonoBehaviour
     GameObject player2MoveButton;
     GameObject endGameButton;
 
-    //Other referecnes
+    //Other references
     GameManager GM;
     GameObject bluePlayer;
     GameObject redPlayer;
@@ -56,6 +56,14 @@ public class ButtonAction : MonoBehaviour
         //call move function from blue game object
         bluePlayer.GetComponent<Player>().MovePlayer();
         player1MoveButton.SetActive(false);
+
+        //Allow player to roll again if they rolled a 6
+        if (Dice.rolledValue == 6)
+        {
+            diceScript.Reset();
+            rollDiceButton.SetActive(true);
+        }
+        else
         endTurnButton.SetActive(true);
     }
 
@@ -64,7 +72,13 @@ public class ButtonAction : MonoBehaviour
     {
         redPlayer.GetComponent<RedPlayer>().MovePlayer();
         player2MoveButton.SetActive(false);
-        endTurnButton.SetActive(true);
+        if (Dice.rolledValue == 6)
+        {
+            diceScript.Reset();
+            rollDiceButton.SetActive(true);
+        }
+        else
+            endTurnButton.SetActive(true);
     }
 
     //On end turn pressed, change player turn (with sfx) and button states
@@ -95,7 +109,7 @@ public class ButtonAction : MonoBehaviour
         }
     }
 
-    //Restart game can be called to reload the entire game
+    //On end game pressed, the game is reset
     public void EndGamePressed()
     {
         Destroy(blueWinsText);

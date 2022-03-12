@@ -58,11 +58,8 @@ public class Player : MonoBehaviour
         //Movement from home space to start space on the route.
         else if (!isMoving && collisionScript.atHome)
         {
-
             if (Dice.diceValue == 6)
             {
-                //Good place for animation///
-
                 transform.position = blueStart.transform.position;
                 Dice.diceValue = 0;
             }
@@ -92,7 +89,6 @@ public class Player : MonoBehaviour
 
             yield return new WaitForSeconds(0.1f);
             Dice.diceValue -= 1;
-
             routePos += 1;
         }
 

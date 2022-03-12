@@ -8,6 +8,7 @@ using UnityEngine;
 
 public class Dice : MonoBehaviour
 {
+    //Main Dice references and variables
     Rigidbody rb;
     public bool hasLanded;
     public bool thrown;
@@ -15,6 +16,7 @@ public class Dice : MonoBehaviour
 
     Vector3 initPos;
     public static int diceValue;
+    public static int rolledValue;
     public DiceSide[] diceSides;
 
     //Audio ref
@@ -27,13 +29,12 @@ public class Dice : MonoBehaviour
     public GameObject rollDiceButton;
 
 
-    //Get the rb component of dice, and starting position in air to drop dice from
+    //Set initial states of Dice and buttons
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
         initPos = transform.position;
         rb.useGravity = false;
-
 
         GM = FindObjectOfType<GameManager>();
 
@@ -58,7 +59,7 @@ public class Dice : MonoBehaviour
         }
     }
 
-    //Get the value of the DiceSide on the ground. Set equal to diceValue
+    //Get the value of the DiceSide on the ground
     void DiceValueCheck()
     {
         foreach (DiceSide side in diceSides)
@@ -66,12 +67,12 @@ public class Dice : MonoBehaviour
             if (side.OnGround())
             {
                 diceValue = side.sideValue;
-                Debug.Log(diceValue + "has been rolled!");
+                rolledValue = side.sideValue;
             }
         }
     }
 
-    //When player turn is done, or player needs to roll again (rolling a 6), set dice to starting position and variable values
+    //Call to reset dice to starting position and variable values
     public void Reset()
     {
         transform.position = initPos;
@@ -80,21 +81,7 @@ public class Dice : MonoBehaviour
         rb.useGravity = false;
     }
 
-    public void RollAgain()
-    {
-        Reset();
-        thrown = true;
-        rb.useGravity = true;
-        rb.AddTorque(Random.Range(0, 500), Random.Range(0, 500), Random.Range(0, 500));
-
-        //Play sound
-        if (!rollDieSound.isPlaying)
-        {
-            rollDieSound.Play();
-        }
-    }
-
-    //Check value of dice after it was thrown
+    //Calls DiceValueCheck if thrown and landed correctly
     private void Update()
     {
         if (rb.IsSleeping() && !hasLanded && thrown)
@@ -114,10 +101,9 @@ public class Dice : MonoBehaviour
                 player2MoveButton.SetActive(true);
             }
         }
-
+        //Allow another roll if dice lands incorrectly
         else if (rb.IsSleeping() && hasLanded && diceValue == 0)
         {
-            //Allow another roll if dice lands incorrectly
             rollDiceButton.SetActive(true);
         }
     }
