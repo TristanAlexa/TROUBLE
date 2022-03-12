@@ -7091,6 +7091,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   redWinsText: {fileID: 1748163791}
   blueWinsText: {fileID: 901264681}
+  diceScript: {fileID: 6801955794505058541}
 --- !u!4 &1476702726
 Transform:
   m_ObjectHideFlags: 0
@@ -10321,6 +10322,7 @@ MonoBehaviour:
   rb: {fileID: 0}
   hasLanded: 0
   thrown: 0
+  badThrow: 0
   diceSides:
   - {fileID: 719877963}
   - {fileID: 517178526}
@@ -10329,6 +10331,8 @@ MonoBehaviour:
   - {fileID: 149902020}
   - {fileID: 610017197}
   rollDieSound: {fileID: 1244049923}
+  player1MoveButton: {fileID: 1815380690}
+  player2MoveButton: {fileID: 1594042052}
 --- !u!1001 &7141684851573934245
 PrefabInstance:
   m_ObjectHideFlags: 0

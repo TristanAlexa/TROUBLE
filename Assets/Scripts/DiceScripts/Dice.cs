@@ -8,9 +8,10 @@ using UnityEngine;
 
 public class Dice : MonoBehaviour
 {
-    public Rigidbody rb;
+    Rigidbody rb;
     public bool hasLanded;
     public bool thrown;
+    public bool badThrow;
 
     Vector3 initPos;
     public static int diceValue;
@@ -19,6 +20,12 @@ public class Dice : MonoBehaviour
     //Audio ref
     public AudioSource rollDieSound;
 
+    //other ref
+    GameManager GM;
+    public GameObject player1MoveButton;
+    public GameObject player2MoveButton;
+    public GameObject rollDiceButton;
+
 
     //Get the rb component of dice, and starting position in air to drop dice from
     private void Start()
@@ -26,6 +33,12 @@ public class Dice : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         initPos = transform.position;
         rb.useGravity = false;
+
+
+        GM = FindObjectOfType<GameManager>();
+
+        player1MoveButton.SetActive(false);
+        player2MoveButton.SetActive(false);
     }
 
     //Allow dice to be thrown at the beginning of the turn
@@ -67,6 +80,20 @@ public class Dice : MonoBehaviour
         rb.useGravity = false;
     }
 
+    public void RollAgain()
+    {
+        Reset();
+        thrown = true;
+        rb.useGravity = true;
+        rb.AddTorque(Random.Range(0, 500), Random.Range(0, 500), Random.Range(0, 500));
+
+        //Play sound
+        if (!rollDieSound.isPlaying)
+        {
+            rollDieSound.Play();
+        }
+    }
+
     //Check value of dice after it was thrown
     private void Update()
     {
@@ -75,8 +102,23 @@ public class Dice : MonoBehaviour
             hasLanded = true;
             rb.useGravity = false;
             DiceValueCheck();
-            Debug.Log(hasLanded);
+
+            //Show move player button only if dice gives a valid value
+            if (GM.currentState == GameState.Player1Turn && hasLanded)
+            {
+                player1MoveButton.SetActive(true);
+            }
+
+            else if (GM.currentState == GameState.Player2Turn && hasLanded)
+            {
+                player2MoveButton.SetActive(true);
+            }
+        }
+
+        else if (rb.IsSleeping() && hasLanded && diceValue == 0)
+        {
+            //Allow another roll if dice lands incorrectly
+            rollDiceButton.SetActive(true);
         }
     }
-
 }

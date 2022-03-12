@@ -24,21 +24,20 @@ public class ButtonAction : MonoBehaviour
     GameObject redPlayer;
     public TextMeshProUGUI redWinsText;
     public TextMeshProUGUI blueWinsText;
+    public Dice diceScript;
 
     //Find all referenced GameObjects in scene. Set initial button visibility
     void Start()
     {
         rollDiceButton = GameObject.Find("RollDie");
         endTurnButton = GameObject.Find("EndTurn");
-        player1MoveButton = GameObject.Find("BluePlayer1Button");
-        player2MoveButton = GameObject.Find("BluePlayer2Button");
+        player1MoveButton = GameObject.Find("BlueMoveButton");
+        player2MoveButton = GameObject.Find("RedMoveButton");
         bluePlayer = GameObject.Find("BluePlayer");
         redPlayer = GameObject.Find("RedPlayer");
         endGameButton = GameObject.Find("EndGameButton");
 
         endTurnButton.SetActive(false);
-        player1MoveButton.SetActive(false);
-        player2MoveButton.SetActive(false);
         endGameButton.SetActive(false);
 
         GM = FindObjectOfType<GameManager>();
@@ -49,17 +48,6 @@ public class ButtonAction : MonoBehaviour
     public void RollDiePressed()
     {
         rollDiceButton.SetActive(false);
-        
-
-        if (GM.currentState == GameState.Player1Turn)
-        {
-            player1MoveButton.SetActive(true);
-        }
-
-        else if (GM.currentState == GameState.Player2Turn)
-        {
-           player2MoveButton.SetActive(true);
-        }
     }
 
     //Move blue pawn if able and reveal end turn button
