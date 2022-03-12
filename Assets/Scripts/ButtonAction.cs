@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class ButtonAction : MonoBehaviour
 {
@@ -15,13 +16,15 @@ public class ButtonAction : MonoBehaviour
     GameObject endTurnButton;
     GameObject player1MoveButton;
     GameObject player2MoveButton;
-    GameObject restartGameButton;
+    GameObject endGameButton;
 
     //Other referecnes
     GameManager GM;
     GameObject bluePlayer;
     GameObject redPlayer;
-    
+    public TextMeshProUGUI redWinsText;
+    public TextMeshProUGUI blueWinsText;
+
     //Find all referenced GameObjects in scene. Set initial button visibility
     void Start()
     {
@@ -31,12 +34,12 @@ public class ButtonAction : MonoBehaviour
         player2MoveButton = GameObject.Find("BluePlayer2Button");
         bluePlayer = GameObject.Find("BluePlayer");
         redPlayer = GameObject.Find("RedPlayer");
-        restartGameButton = GameObject.Find("RestartGameButton");
+        endGameButton = GameObject.Find("EndGameButton");
 
         endTurnButton.SetActive(false);
         player1MoveButton.SetActive(false);
         player2MoveButton.SetActive(false);
-        restartGameButton.SetActive(false);
+        endGameButton.SetActive(false);
 
         GM = FindObjectOfType<GameManager>();
 
@@ -55,7 +58,7 @@ public class ButtonAction : MonoBehaviour
 
         else if (GM.currentState == GameState.Player2Turn)
         {
-            player2MoveButton.SetActive(true);
+           player2MoveButton.SetActive(true);
         }
     }
 
@@ -71,14 +74,12 @@ public class ButtonAction : MonoBehaviour
     //Move red pawn if able and reveal end turn button
     public void Player2MovePressed()
     {
-        
         redPlayer.GetComponent<RedPlayer>().MovePlayer();
         player2MoveButton.SetActive(false);
-
         endTurnButton.SetActive(true);
     }
 
-    //On end turn pressed, change player turn and button states
+    //On end turn pressed, change player turn (with sfx) and button states
     public void EndTurnPressed()
     {
         endTurnButton.SetActive(false);
@@ -98,19 +99,19 @@ public class ButtonAction : MonoBehaviour
         //Show restart game button if in winning state
         else if (GM.currentState == GameState.RedWin)
         {
-            restartGameButton.SetActive(true);
+            endGameButton.SetActive(true);
         }
         else if (GM.currentState == GameState.BlueWin)
         {
-            restartGameButton.SetActive(true);
+            endGameButton.SetActive(true);
         }
     }
 
     //Restart game can be called to reload the entire game
-    public void RestartGamePressed()
+    public void EndGamePressed()
     {
-        GM.currentState = GameState.End;
+        Destroy(blueWinsText);
+        Destroy(redWinsText);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        restartGameButton.SetActive(false);
     }
 }

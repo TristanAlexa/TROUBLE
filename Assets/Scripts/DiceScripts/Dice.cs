@@ -75,6 +75,7 @@ public class Dice : MonoBehaviour
             hasLanded = true;
             rb.useGravity = false;
             DiceValueCheck();
+            Debug.Log(hasLanded);
         }
     }
 

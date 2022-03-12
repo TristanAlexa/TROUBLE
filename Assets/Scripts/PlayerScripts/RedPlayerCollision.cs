@@ -11,6 +11,7 @@ public class RedPlayerCollision : MonoBehaviour
 
     //Other ref.
     GameManager GM;
+    public AudioSource winSound;
 
     private void Start()
     {
@@ -31,6 +32,10 @@ public class RedPlayerCollision : MonoBehaviour
     {
         if (other.gameObject.CompareTag("RedFinish"))
         {
+            if (!winSound.isPlaying)
+            {
+                winSound.Play();
+            }
             GM.currentState = GameState.RedWin;
         }
     }

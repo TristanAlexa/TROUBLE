@@ -11,7 +11,7 @@ using Assets;
 using UnityEngine.UI;
 using TMPro;
 
-public enum GameState {Player1Turn, Player2Turn, BlueWin, RedWin, End}; 
+public enum GameState {Player1Turn, Player2Turn, BlueWin, RedWin}; 
 
 public class GameManager : GenericSingleton<GameManager>
 {
@@ -29,10 +29,8 @@ public class GameManager : GenericSingleton<GameManager>
     public TextMeshProUGUI redTurnText;
     public TextMeshProUGUI blueTurnText;
 
-    //Audio ref
-    public AudioSource winStateSound;
-
-    private void Start()
+    //Set initial gamestate and button visibility
+    public override void Awake()
     {
         currentState = GameState.Player1Turn;
         redWinsText.gameObject.SetActive(false);
@@ -50,7 +48,6 @@ public class GameManager : GenericSingleton<GameManager>
                 //State player turn using UI
                 blueTurnText.gameObject.SetActive(true);
                 redTurnText.gameObject.SetActive(false);
-
                 break;
 
             case GameState.Player2Turn:
@@ -62,29 +59,28 @@ public class GameManager : GenericSingleton<GameManager>
 
             case GameState.BlueWin:
                 //UI Blue player wins
-                blueWinsText.gameObject.SetActive(true);
-                blueTurnText.gameObject.SetActive(false);
-
-                if (!winStateSound.isPlaying)
+                if (blueWinsText != null)
                 {
-                    winStateSound.Play();
+                    blueWinsText.gameObject.SetActive(true);
+
+                }
+                if (blueTurnText != null)
+                {
+                    Destroy(blueTurnText);
                 }
                 break;
 
             case GameState.RedWin:
                 //UI Red player wins
-                redWinsText.gameObject.SetActive(true);
-                redTurnText.gameObject.SetActive(false);
-
-                if (!winStateSound.isPlaying)
+                if (redWinsText != null)
                 {
-                    winStateSound.Play();
+                    redWinsText.gameObject.SetActive(true);
                 }
-                break;
 
-            case GameState.End:
-                redWinsText.gameObject.SetActive(false);
-                blueWinsText.gameObject.SetActive(false);
+                if (redTurnText != null)
+                {
+                    Destroy(redTurnText);
+                }
                 break;
 
                 default:

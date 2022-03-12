@@ -1547,7 +1547,6 @@ MonoBehaviour:
   blueWinsText: {fileID: 901264681}
   redTurnText: {fileID: 313371665}
   blueTurnText: {fileID: 86463509}
-  winStateSound: {fileID: 348950383}
 --- !u!4 &305008243
 Transform:
   m_ObjectHideFlags: 0
@@ -1596,7 +1595,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -400, y: 300}
+  m_AnchoredPosition: {x: 400, y: 300}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &313371665
@@ -4258,7 +4257,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 80b44e0f4b2c5476bb3985382dc10705, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 79c1a1335411f48d9accfdb9a7ac85ea, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -6461,6 +6460,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerScript: {fileID: 1344809557}
+  winSound: {fileID: 348950383}
 --- !u!114 &1344809557
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6506,7 +6506,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1344809555}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.306, y: -0.003, z: -2.638}
+  m_LocalPosition: {x: -2.306, y: 0.025, z: -2.638}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1510469475}
@@ -7089,6 +7089,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fb1a44cf0369464bbe9cfab1b5b2f45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  redWinsText: {fileID: 1748163791}
+  blueWinsText: {fileID: 901264681}
 --- !u!4 &1476702726
 Transform:
   m_ObjectHideFlags: 0
@@ -7315,8 +7317,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1510469474}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: 0.21, z: 0.001}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.00020003319, y: 0.156906, z: 0.00020003319}
   m_LocalScale: {x: 0.29896203, y: 0.18790582, z: 0.29896203}
   m_Children: []
   m_Father: {fileID: 1344809559}
@@ -7489,7 +7491,7 @@ GameObject:
   - component: {fileID: 1530595157}
   - component: {fileID: 1530595156}
   m_Layer: 5
-  m_Name: RestartGameButton
+  m_Name: EndGameButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7559,7 +7561,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1476702725}
-        m_MethodName: RestartGamePressed
+        m_MethodName: EndGamePressed
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7631,7 +7633,7 @@ GameObject:
   - component: {fileID: 1554002194}
   m_Layer: 0
   m_Name: Board_Tile (26)
-  m_TagString: BlueFinish
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10006,6 +10008,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   redPlayerScript: {fileID: 2072591490}
+  winSound: {fileID: 348950383}
 --- !u!114 &2072591490
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10346,7 +10349,7 @@ PrefabInstance:
     - target: {fileID: 3905442099977804531, guid: d4d69f835c71a498789623a61557f332,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.5
+      value: 0.853
       objectReference: {fileID: 0}
     - target: {fileID: 3905442099977804531, guid: d4d69f835c71a498789623a61557f332,
         type: 3}

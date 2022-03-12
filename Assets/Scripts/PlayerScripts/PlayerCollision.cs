@@ -15,6 +15,7 @@ public class PlayerCollision : MonoBehaviour
 
     //other ref.
     GameManager GM;
+    public AudioSource winSound;
 
     private void Start()
     {
@@ -30,14 +31,6 @@ public class PlayerCollision : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.CompareTag("BlueFinish"))
-        {
-            GM.currentState = GameState.BlueWin;
-        }
-    }
-
     //Set collision values to false when player leaves specific tiles
     private void OnTriggerExit(Collider collision)
     {
@@ -47,10 +40,23 @@ public class PlayerCollision : MonoBehaviour
         }
     }
 
-    //returns T/F value of collision with specific tiles
+    //returns T/F value of collision with home tile
     public bool AtHome()
     {
         return atHome;
+    }
+
+    //Play win sfx and change to win state on collision with final tile
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("BlueFinish"))
+        {
+            if (!winSound.isPlaying)
+            {
+                winSound.Play();
+            }
+            GM.currentState = GameState.BlueWin;
+        }
     }
 
 }
