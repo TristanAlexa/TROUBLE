@@ -102,7 +102,7 @@ public class Dice : MonoBehaviour
             }
         }
         //Allow another roll if dice lands incorrectly
-        else if (rb.IsSleeping() && hasLanded && diceValue == 0)
+        else if (rb.IsSleeping() && thrown && diceValue == 0)
         {
             rollDiceButton.SetActive(true);
         }

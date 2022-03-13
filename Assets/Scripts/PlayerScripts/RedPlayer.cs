@@ -23,6 +23,8 @@ public class RedPlayer : MonoBehaviour
     public GameObject redStart;
     public TextMeshProUGUI rollSixText;
     public TextMeshProUGUI noMovesText;
+    public AudioSource ableToMoveSound;
+    public AudioSource noMoveSound;
 
     //Sub-scripts references
     [SerializeField]
@@ -59,6 +61,10 @@ public class RedPlayer : MonoBehaviour
             //Send player to start space if at home and rolled a 6
             if (Dice.diceValue == 6)
             {
+                if (!ableToMoveSound.isPlaying)
+                {
+                    ableToMoveSound.Play();
+                }
                 transform.position = redStart.transform.position;
                 Dice.diceValue = 0;
             }
@@ -74,6 +80,10 @@ public class RedPlayer : MonoBehaviour
     //Using coroutine instead of update method for optimization
     IEnumerator Move()
     {
+        if (!ableToMoveSound.isPlaying)
+        {
+            ableToMoveSound.Play();
+        }
         if (isMoving)
         {
             yield break;
@@ -104,6 +114,10 @@ public class RedPlayer : MonoBehaviour
     private IEnumerator TempActivateRollSix(float duration)
     {
         rollSixText.gameObject.SetActive(true);
+        if (!noMoveSound.isPlaying)
+        {
+            noMoveSound.Play();
+        }
         yield return new WaitForSeconds(duration);
         rollSixText.gameObject.SetActive(false);
     }
@@ -111,6 +125,10 @@ public class RedPlayer : MonoBehaviour
     private IEnumerator TempActivateNoMoves(float duration)
     {
         noMovesText.gameObject.SetActive(true);
+        if (!noMoveSound.isPlaying)
+        {
+            noMoveSound.Play();
+        }
         yield return new WaitForSeconds(duration);
         noMovesText.gameObject.SetActive(false);
     }
